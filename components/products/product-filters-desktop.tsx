@@ -3,6 +3,7 @@
 import { Categories } from "@/data/categories";
 import { Variants } from "@/data/variants";
 import { useProductFilters } from "@/hooks/use-product-filters";
+import { Grid3X3, List } from "lucide-react";
 
 type FilterOptionProps = {
   label: string;
@@ -42,6 +43,8 @@ export default function ProductFiltersDesktop() {
     selectedVariant,
     setSelectedVariant,
     resetFilters,
+    view,
+    setView,
   } = useProductFilters();
 
   const hasActiveFilters =
@@ -60,6 +63,36 @@ export default function ProductFiltersDesktop() {
             Reset
           </button>
         ) : null}
+      </div>
+      {/* View Toggle */}
+      <div className="mb-8">
+        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-base-content/60">
+          View
+        </h3>
+
+        <div className="join w-full">
+          <button
+            type="button"
+            onClick={() => setView("grid")}
+            className={`btn join-item flex-1 ${
+              view === "grid" ? "btn-primary" : "btn-outline"
+            }`}
+          >
+            <Grid3X3 size={18} />
+            Grid
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setView("list")}
+            className={`btn join-item flex-1 ${
+              view === "list" ? "btn-primary" : "btn-outline"
+            }`}
+          >
+            <List size={18} />
+            List
+          </button>
+        </div>
       </div>
 
       <div className="space-y-8">

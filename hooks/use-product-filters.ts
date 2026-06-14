@@ -6,6 +6,10 @@ import { parseAsArrayOf, parseAsStringLiteral, useQueryState } from "nuqs";
 import { Categories } from "@/data/categories";
 import { Variants } from "@/data/variants";
 
+type ProductView = "grid" | "list";
+
+const viewOptions = ["grid", "list"] as const;
+
 // derive allowed values from source of truth
 const categoryValues = [...Categories.map((c) => c.value)] as const;
 
@@ -32,7 +36,10 @@ export function useProductFilters() {
     variantParser,
   );
 
-  console.log("selectedCategory in hook", selectedCategory);
+  const [view, setView] = useQueryState(
+    "view",
+    parseAsStringLiteral(viewOptions).withDefault("grid"),
+  );
 
   const setSelectedCategoryArray = (value: string) => {
     if (selectedCategory.includes(value)) {
@@ -61,5 +68,7 @@ export function useProductFilters() {
     selectedVariant,
     setSelectedVariant: setSelectedVariantArray,
     resetFilters,
+    view,
+    setView,
   };
 }
