@@ -103,7 +103,7 @@ const Navbar = () => {
                   {/* Active indicator */}
                   <span
                     className={clsx(
-                      "absolute bottom-0 left-1/2 h-[3px] w-6 -translate-x-1/2 rounded-full bg-primary transition-all duration-300",
+                      "absolute bottom-0 left-1/2 h-0.75 w-6 -translate-x-1/2 rounded-full bg-primary transition-all duration-300",
                       {
                         "opacity-100": active,
                         "opacity-0": !active,

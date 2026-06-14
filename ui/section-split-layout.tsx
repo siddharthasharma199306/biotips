@@ -39,7 +39,7 @@ const SectionSplitLayout = ({
               width={800}
               height={800}
               className={clsx(
-                "h-[320px] w-full object-cover md:h-112.5 lg:h-150",
+                "h-80 w-full object-cover md:h-112.5 lg:h-150",
                 imageClassName,
               )}
             />
