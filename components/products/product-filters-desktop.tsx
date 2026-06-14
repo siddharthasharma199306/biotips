@@ -4,22 +4,6 @@ import { Categories } from "@/data/categories";
 import { Variants } from "@/data/variants";
 import { useProductFilters } from "@/hooks/use-product-filters";
 
-const categories = [
-  {
-    label: "All",
-    value: "All",
-  },
-  ...Categories,
-];
-
-const variants = [
-  {
-    label: "All",
-    value: "All",
-  },
-  ...Variants,
-];
-
 type FilterOptionProps = {
   label: string;
   checked: boolean;
@@ -57,11 +41,26 @@ export default function ProductFiltersDesktop() {
     setSelectedCategory,
     selectedVariant,
     setSelectedVariant,
+    resetFilters,
   } = useProductFilters();
+
+  const hasActiveFilters =
+    selectedCategory.length > 0 || selectedVariant.length > 0;
 
   return (
     <div className="sticky top-28 rounded-2xl border border-base-300 bg-base-100 p-6 shadow-sm">
-      <h2 className="mb-6 text-xl font-bold">Filters</h2>
+      <div className="mb-6 flex items-center justify-between">
+        <h2 className="text-xl font-bold">Filters</h2>
+        {hasActiveFilters ? (
+          <button
+            type="button"
+            onClick={resetFilters}
+            className="text-sm font-medium text-red-700 transition hover:underline"
+          >
+            Reset
+          </button>
+        ) : null}
+      </div>
 
       <div className="space-y-8">
         {/* Category */}
@@ -71,11 +70,11 @@ export default function ProductFiltersDesktop() {
           </h3>
 
           <div className="space-y-1">
-            {categories.map((category) => (
+            {Categories.map((category) => (
               <FilterOption
                 key={category.value}
                 label={category.label}
-                checked={selectedCategory === category.value}
+                checked={selectedCategory.includes(category.value)}
                 onClick={() => setSelectedCategory(category.value)}
               />
             ))}
@@ -89,11 +88,11 @@ export default function ProductFiltersDesktop() {
           </h3>
 
           <div className="space-y-1">
-            {variants.map((variant) => (
+            {Variants.map((variant) => (
               <FilterOption
                 key={variant.value}
                 label={variant.label}
-                checked={selectedVariant === variant.value}
+                checked={selectedVariant.includes(variant.value)}
                 onClick={() => setSelectedVariant(variant.value)}
               />
             ))}

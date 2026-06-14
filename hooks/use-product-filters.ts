@@ -1,26 +1,24 @@
 "use client";
 
 import { useMemo } from "react";
-import { parseAsStringLiteral, useQueryState } from "nuqs";
+import { parseAsArrayOf, parseAsStringLiteral, useQueryState } from "nuqs";
 
 import { Categories } from "@/data/categories";
 import { Variants } from "@/data/variants";
 
-const ALL = "All" as const;
-
 // derive allowed values from source of truth
-const categoryValues = [ALL, ...Categories.map((c) => c.value)] as const;
+const categoryValues = [...Categories.map((c) => c.value)] as const;
 
-const variantValues = [ALL, ...Variants.map((v) => v.value)] as const;
+const variantValues = [...Variants.map((v) => v.value)] as const;
 
 export function useProductFilters() {
   const categoryParser = useMemo(
-    () => parseAsStringLiteral(categoryValues).withDefault(ALL),
+    () => parseAsArrayOf(parseAsStringLiteral(categoryValues)).withDefault([]),
     [],
   );
 
   const variantParser = useMemo(
-    () => parseAsStringLiteral(variantValues).withDefault(ALL),
+    () => parseAsArrayOf(parseAsStringLiteral(variantValues)).withDefault([]),
     [],
   );
 
@@ -34,10 +32,34 @@ export function useProductFilters() {
     variantParser,
   );
 
+  console.log("selectedCategory in hook", selectedCategory);
+
+  const setSelectedCategoryArray = (value: string) => {
+    if (selectedCategory.includes(value)) {
+      setSelectedCategory(selectedCategory.filter((c) => c !== value));
+    } else {
+      setSelectedCategory([...selectedCategory, value]);
+    }
+  };
+
+  const setSelectedVariantArray = (value: string) => {
+    if (selectedVariant.includes(value)) {
+      setSelectedVariant(selectedVariant.filter((v) => v !== value));
+    } else {
+      setSelectedVariant([...selectedVariant, value]);
+    }
+  };
+
+  const resetFilters = () => {
+    setSelectedCategory([]);
+    setSelectedVariant([]);
+  };
+
   return {
     selectedCategory,
-    setSelectedCategory,
+    setSelectedCategory: setSelectedCategoryArray,
     selectedVariant,
-    setSelectedVariant,
+    setSelectedVariant: setSelectedVariantArray,
+    resetFilters,
   };
 }

@@ -7,17 +7,27 @@ import { useProductFilters } from "@/hooks/use-product-filters";
 
 const ProductGrid = () => {
   const { selectedCategory, selectedVariant } = useProductFilters();
+
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
-      const categoryMatch =
-        selectedCategory === "All" || product.category === selectedCategory;
+      let categoryMatch = false;
+      let variantMatch = false;
+      if (selectedCategory.length === 0) {
+        categoryMatch = true;
+      } else {
+        categoryMatch = selectedCategory.includes(product.category);
+      }
 
-      const variantMatch =
-        selectedVariant === "All" || product.variant === selectedVariant;
+      if (selectedVariant.length === 0) {
+        variantMatch = true;
+      } else {
+        variantMatch = selectedVariant.includes(product.variant);
+      }
 
       return categoryMatch && variantMatch;
     });
   }, [selectedCategory, selectedVariant]);
+
   return (
     <>
       {/* Count */}
