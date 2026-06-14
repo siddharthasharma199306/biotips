@@ -1,7 +1,7 @@
 // app/products/[slug]/page.tsx
 
 import ProductCarousel from "@/ui/product-carousel";
-import { products } from "@/constants/products";
+import { products } from "@/data/products";
 
 type Props = {
   params: Promise<{
