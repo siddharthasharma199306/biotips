@@ -1,6 +1,5 @@
 "use client";
 
-import { Variants } from "@/data/variants";
 import { useProductFilters } from "@/hooks/use-product-filters";
 import { Category } from "@/lib/content/categories";
 import { Variant } from "@/lib/content/variants";
@@ -104,7 +103,7 @@ const ProductFilterMobile = ({
         </h3>
 
         <div className="flex flex-wrap gap-3">
-          {Variants.map((variant) => (
+          {variants.map((variant) => (
             <button
               key={variant.value}
               type="button"
