@@ -1,8 +1,21 @@
 import { useProductFilters } from "@/hooks/use-product-filters";
+import { Category } from "@/lib/content/categories";
 import { Product } from "@/lib/content/products";
+import { Variant } from "@/lib/content/variants";
 
-const useFilteredProducts = ({ products }: { products: Product[] }) => {
-  const { selectedCategory, selectedVariant } = useProductFilters();
+const useFilteredProducts = ({
+  products,
+  categories,
+  variants,
+}: {
+  products: Product[];
+  categories: Category[];
+  variants: Variant[];
+}) => {
+  const { selectedCategory, selectedVariant } = useProductFilters({
+    categories,
+    variants,
+  });
 
   const filteredProducts = products.filter((product) => {
     const categoryMatch =

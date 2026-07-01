@@ -1,3 +1,7 @@
+// lib/content/products.ts
+
+import { getContent } from "./client";
+
 export interface Product {
   slug: string;
   title: string;
@@ -11,22 +15,11 @@ export interface Product {
   }[];
 }
 
-const PRODUCTS_URL =
-  "https://biotips-content.s3.ap-south-1.amazonaws.com/data/products.json";
-
 let productsPromise: Promise<Product[]> | null = null;
 
 export async function getProducts(): Promise<Product[]> {
   if (!productsPromise) {
-    productsPromise = fetch(PRODUCTS_URL, {
-      cache: "force-cache",
-    }).then(async (response) => {
-      if (!response.ok) {
-        throw new Error("Unable to fetch products");
-      }
-
-      return response.json() as Promise<Product[]>;
-    });
+    productsPromise = getContent<Product[]>("products.json");
   }
 
   return productsPromise;

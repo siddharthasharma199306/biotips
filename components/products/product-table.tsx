@@ -3,9 +3,23 @@ import Link from "next/link";
 import useFilteredProducts from "./hooks/useFilteredProducts";
 import findPrimaryImage from "./utils/find-primary-image";
 import { Product } from "@/lib/content/products";
+import { Category } from "@/lib/content/categories";
+import { Variant } from "@/lib/content/variants";
 
-const ProductTable = ({ products }: { products: Product[] }) => {
-  const { filteredProducts } = useFilteredProducts({ products });
+const ProductTable = ({
+  products,
+  categories,
+  variants,
+}: {
+  products: Product[];
+  categories: Category[];
+  variants: Variant[];
+}) => {
+  const { filteredProducts } = useFilteredProducts({
+    products,
+    categories,
+    variants,
+  });
 
   return (
     <div className="overflow-x-auto rounded-2xl border border-base-300 bg-base-100 shadow-sm">

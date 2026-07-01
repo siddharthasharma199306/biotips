@@ -1,10 +1,18 @@
 "use client";
-import { Categories } from "@/data/categories";
+
 import { Variants } from "@/data/variants";
 import { useProductFilters } from "@/hooks/use-product-filters";
+import { Category } from "@/lib/content/categories";
+import { Variant } from "@/lib/content/variants";
 import { Grid3X3, List } from "lucide-react";
 
-const ProductFilterMobile = () => {
+const ProductFilterMobile = ({
+  categories,
+  variants,
+}: {
+  categories: Category[];
+  variants: Variant[];
+}) => {
   const {
     selectedCategory,
     setSelectedCategory,
@@ -13,7 +21,7 @@ const ProductFilterMobile = () => {
     resetFilters,
     view,
     setView,
-  } = useProductFilters();
+  } = useProductFilters({ categories, variants });
 
   const hasActiveFilters =
     selectedCategory.length > 0 || selectedVariant.length > 0;
@@ -72,7 +80,7 @@ const ProductFilterMobile = () => {
         </h3>
 
         <div className="flex flex-wrap gap-3">
-          {Categories.map((category) => (
+          {categories.map((category) => (
             <button
               key={category.value}
               type="button"

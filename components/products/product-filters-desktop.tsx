@@ -1,9 +1,9 @@
 "use client";
 
-import { Categories } from "@/data/categories";
-import { Variants } from "@/data/variants";
 import { useProductFilters } from "@/hooks/use-product-filters";
 import { Grid3X3, List } from "lucide-react";
+import { Category } from "@/lib/content/categories";
+import { Variant } from "@/lib/content/variants";
 
 type FilterOptionProps = {
   label: string;
@@ -36,7 +36,13 @@ function FilterOption({ label, checked, onClick }: FilterOptionProps) {
   );
 }
 
-export default function ProductFiltersDesktop() {
+export default function ProductFiltersDesktop({
+  categories,
+  variants,
+}: {
+  categories: Category[];
+  variants: Variant[];
+}) {
   const {
     selectedCategory,
     setSelectedCategory,
@@ -45,7 +51,7 @@ export default function ProductFiltersDesktop() {
     resetFilters,
     view,
     setView,
-  } = useProductFilters();
+  } = useProductFilters({ categories, variants });
 
   const hasActiveFilters =
     selectedCategory.length > 0 || selectedVariant.length > 0;
@@ -103,7 +109,7 @@ export default function ProductFiltersDesktop() {
           </h3>
 
           <div className="space-y-1">
-            {Categories.map((category) => (
+            {categories.map((category) => (
               <FilterOption
                 key={category.value}
                 label={category.label}
@@ -121,7 +127,7 @@ export default function ProductFiltersDesktop() {
           </h3>
 
           <div className="space-y-1">
-            {Variants.map((variant) => (
+            {variants.map((variant) => (
               <FilterOption
                 key={variant.value}
                 label={variant.label}

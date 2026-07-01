@@ -3,25 +3,42 @@
 import { useMemo } from "react";
 import { parseAsArrayOf, parseAsStringLiteral, useQueryState } from "nuqs";
 
-import { Categories } from "@/data/categories";
-import { Variants } from "@/data/variants";
+import { Category } from "@/lib/content/categories";
+import { Variant } from "@/lib/content/variants";
 
 const viewOptions = ["grid", "list"] as const;
 
-// derive allowed values from source of truth
-const categoryValues = [...Categories.map((c) => c.value)] as const;
+type UseProductFiltersProps = {
+  categories: Category[] | undefined;
+  variants: Variant[] | undefined;
+};
 
-const variantValues = [...Variants.map((v) => v.value)] as const;
+export function useProductFilters({
+  categories,
+  variants,
+}: UseProductFiltersProps) {
+  const categoryValues = useMemo(() => {
+    if (!categories || categories.length === 0) {
+      return [];
+    }
+    return categories.map((category) => category.value) as string[];
+  }, [categories]);
 
-export function useProductFilters() {
+  const variantValues = useMemo(() => {
+    if (!variants || variants.length === 0) {
+      return [];
+    }
+    return variants.map((variant) => variant.value) as string[];
+  }, [variants]);
+
   const categoryParser = useMemo(
     () => parseAsArrayOf(parseAsStringLiteral(categoryValues)).withDefault([]),
-    [],
+    [categoryValues],
   );
 
   const variantParser = useMemo(
     () => parseAsArrayOf(parseAsStringLiteral(variantValues)).withDefault([]),
-    [],
+    [variantValues],
   );
 
   const [selectedCategory, setSelectedCategory] = useQueryState(
@@ -39,20 +56,20 @@ export function useProductFilters() {
     parseAsStringLiteral(viewOptions).withDefault("grid"),
   );
 
-  const setSelectedCategoryArray = (value: string) => {
-    if (selectedCategory.includes(value)) {
-      setSelectedCategory(selectedCategory.filter((c) => c !== value));
-    } else {
-      setSelectedCategory([...selectedCategory, value]);
-    }
+  const toggleCategory = (value: string) => {
+    setSelectedCategory(
+      selectedCategory.includes(value)
+        ? selectedCategory.filter((category) => category !== value)
+        : [...selectedCategory, value],
+    );
   };
 
-  const setSelectedVariantArray = (value: string) => {
-    if (selectedVariant.includes(value)) {
-      setSelectedVariant(selectedVariant.filter((v) => v !== value));
-    } else {
-      setSelectedVariant([...selectedVariant, value]);
-    }
+  const toggleVariant = (value: string) => {
+    setSelectedVariant(
+      selectedVariant.includes(value)
+        ? selectedVariant.filter((variant) => variant !== value)
+        : [...selectedVariant, value],
+    );
   };
 
   const resetFilters = () => {
@@ -62,9 +79,9 @@ export function useProductFilters() {
 
   return {
     selectedCategory,
-    setSelectedCategory: setSelectedCategoryArray,
+    setSelectedCategory: toggleCategory,
     selectedVariant,
-    setSelectedVariant: setSelectedVariantArray,
+    setSelectedVariant: toggleVariant,
     resetFilters,
     view,
     setView,
