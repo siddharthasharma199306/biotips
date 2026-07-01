@@ -1,7 +1,7 @@
-// app/products/[slug]/page.tsx
+import { notFound } from "next/navigation";
 
-import ProductCarousel from "@/ui/product-carousel";
 import { products } from "@/data/products";
+import ProductCarousel from "@/ui/product-carousel";
 
 type Props = {
   params: Promise<{
@@ -9,13 +9,19 @@ type Props = {
   }>;
 };
 
+export function generateStaticParams() {
+  return products.map((product) => ({
+    slug: product.slug,
+  }));
+}
+
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
 
   const product = products.find((p) => p.slug === slug);
 
   if (!product) {
-    return <div className="py-20 text-center">Product not found</div>;
+    notFound();
   }
 
   return (
@@ -67,7 +73,7 @@ export default async function ProductPage({ params }: Props) {
 
           {/* Bottom CTA */}
           <div className="mt-8">
-            <button className="btn btn-primary rounded-full w-fit px-8">
+            <button className="btn btn-primary w-fit rounded-full px-8">
               Contact for Enquiry
             </button>
           </div>

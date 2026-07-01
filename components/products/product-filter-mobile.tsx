@@ -1,3 +1,4 @@
+"use client";
 import { Categories } from "@/data/categories";
 import { Variants } from "@/data/variants";
 import { useProductFilters } from "@/hooks/use-product-filters";

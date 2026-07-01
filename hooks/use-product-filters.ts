@@ -6,8 +6,6 @@ import { parseAsArrayOf, parseAsStringLiteral, useQueryState } from "nuqs";
 import { Categories } from "@/data/categories";
 import { Variants } from "@/data/variants";
 
-type ProductView = "grid" | "list";
-
 const viewOptions = ["grid", "list"] as const;
 
 // derive allowed values from source of truth
