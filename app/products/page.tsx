@@ -1,11 +1,15 @@
 import { Suspense } from "react";
 
+import { getProducts } from "@/lib/content/products";
+
 import ProductBanner from "@/components/products/product-banner";
 import ProductFilterMobile from "@/components/products/product-filter-mobile";
 import ProductFiltersDesktop from "@/components/products/product-filters-desktop";
-import ProductGrid from "@/components/products/product-grid";
+import ProductViews from "@/components/products/product-views";
 
-function ProductsContent() {
+async function ProductsContent() {
+  const products = await getProducts();
+
   return (
     <>
       {/* Mobile / Tablet Filters */}
@@ -15,14 +19,12 @@ function ProductsContent() {
 
       {/* Desktop Layout */}
       <div className="mt-10 grid gap-10 xl:grid-cols-[280px_1fr]">
-        {/* Left Sidebar Filter */}
         <aside className="hidden xl:block">
           <ProductFiltersDesktop />
         </aside>
 
-        {/* Products */}
         <div className="min-w-0">
-          <ProductGrid />
+          <ProductViews products={products} />
         </div>
       </div>
     </>

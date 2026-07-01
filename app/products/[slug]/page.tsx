@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { products } from "@/data/products";
+import { getProducts, getProductBySlug } from "@/lib/content/products";
 import ProductCarousel from "@/ui/product-carousel";
 
 type Props = {
@@ -9,7 +9,8 @@ type Props = {
   }>;
 };
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
+  const products = await getProducts();
   return products.map((product) => ({
     slug: product.slug,
   }));
@@ -18,7 +19,7 @@ export function generateStaticParams() {
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
 
-  const product = products.find((p) => p.slug === slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) {
     notFound();
