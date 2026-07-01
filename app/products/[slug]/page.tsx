@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 
 import { getProducts, getProductBySlug } from "@/lib/content/products";
 import ProductCarousel from "@/ui/product-carousel";
+import { getCategories } from "@/lib/content/categories";
 
 type Props = {
   params: Promise<{
@@ -19,11 +20,18 @@ export async function generateStaticParams() {
 export default async function ProductPage({ params }: Props) {
   const { slug } = await params;
 
-  const product = await getProductBySlug(slug);
+  const [product, categories] = await Promise.all([
+    getProductBySlug(slug),
+    getCategories(),
+  ]);
 
   if (!product) {
     notFound();
   }
+
+  const categoryLabel =
+    categories.find((category) => category.value === product.category)?.label ??
+    product.category;
 
   return (
     <main className="mx-auto w-full max-w-7xl px-6 py-16 lg:px-8 lg:py-24">
@@ -37,7 +45,7 @@ export default async function ProductPage({ params }: Props) {
           <div>
             <div className="mb-5 flex flex-wrap gap-2">
               <span className="rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-                {product.category}
+                {categoryLabel}
               </span>
 
               <span className="rounded-full bg-base-200 px-4 py-2 text-sm text-base-content/70">

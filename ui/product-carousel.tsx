@@ -36,6 +36,8 @@ const ProductCarousel = ({ images, title }: ProductCarouselProps) => {
                   src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${image}`}
                   alt={`${title}-${index}`}
                   fill
+                  loading={index === 0 ? "eager" : "lazy"}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
                   className="object-contain p-8"
                 />
               </div>

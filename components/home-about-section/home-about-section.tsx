@@ -3,12 +3,11 @@
 import SectionRedirectionLink from "@/ui/section-redirection-link";
 import SectionSplitLayout from "@/ui/section-split-layout";
 import SectiontitleBadge from "@/ui/section-title-badge";
-import Link from "next/link";
 
 const AboutSection = () => {
   return (
     <SectionSplitLayout
-      imageSrc="/about-section-side-image.png"
+      imageSrc={`${process.env.NEXT_PUBLIC_IMAGES_URL}/site/about-section-side-image.png`}
       imageAlt="About Biotips"
     >
       <SectiontitleBadge title="About Biotips" />

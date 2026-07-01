@@ -38,6 +38,8 @@ const SectionSplitLayout = ({
               alt={imageAlt}
               width={800}
               height={800}
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, 50vw"
               className={clsx(
                 "h-80 w-full object-cover md:h-112.5 lg:h-150",
                 imageClassName,
