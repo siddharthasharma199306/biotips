@@ -1,5 +1,3 @@
-// lib/content/variants.ts
-
 import { getContent } from "./client";
 
 export interface Variant {

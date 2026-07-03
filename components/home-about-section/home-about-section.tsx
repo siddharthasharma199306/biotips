@@ -1,5 +1,3 @@
-// components/AboutSection.tsx
-
 import SectionRedirectionLink from "@/ui/section-redirection-link";
 import SectionSplitLayout from "@/ui/section-split-layout";
 import SectiontitleBadge from "@/ui/section-title-badge";

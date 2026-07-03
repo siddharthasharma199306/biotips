@@ -1,5 +1,3 @@
-// lib/content/products.ts
-
 import { getContent } from "./client";
 
 export interface Product {

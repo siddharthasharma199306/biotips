@@ -1,5 +1,3 @@
-// components/AnimatedCounter.tsx
-
 "use client";
 
 import { animate, motion, useInView, useMotionValue } from "motion/react";
