@@ -1,5 +1,5 @@
-import AboutSection from "@/components/home-about-section/home-about-section";
-import HomeBanner from "@/components/home-banner/home-banner";
+import AboutSection from "@/app/_home/home-about-section";
+import HomeBanner from "./_home/home-banner";
 
 export default function Home() {
   return (
