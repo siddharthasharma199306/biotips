@@ -23,13 +23,16 @@ const ProductGrid = ({
   return (
     <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-3">
       {filteredProducts.map((product) => {
+        const categoryLabel =
+          categories.find((item) => item.value === product.category)?.label ??
+          product.category;
         const primaryImage = findPrimaryImage(product.images);
         return (
           <ProductCategoryCard
             key={product.slug}
             slug={product.slug}
             title={product.title}
-            category={product.category}
+            category={categoryLabel}
             variant={product.variant}
             description={product.description}
             imageSrc={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${primaryImage}`}

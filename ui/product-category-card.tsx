@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Category } from "@/lib/content/categories";
 
 type Salt = {
   name: string;
@@ -29,7 +30,7 @@ const ProductCategoryCard = ({
   buttonText = "Explore",
 }: ProductCategoryCardProps) => {
   return (
-    <div className="card bg-base-100 mx-auto w-full max-w-[400px] overflow-hidden rounded-[32px] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+    <div className="card bg-base-100 mx-auto w-full max-w-100 overflow-hidden rounded-4xl shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
       <figure className="relative h-64 w-full bg-base-200">
         <Image
           src={imageSrc}
