@@ -1,10 +1,10 @@
 import { getProducts } from "@/lib/content/products";
 
-import ProductFilterMobile from "@/components/products/product-filter-mobile";
-import ProductFiltersDesktop from "@/components/products/product-filters-desktop";
-import ProductViews from "@/components/products/product-views";
+import ProductFilterMobile from "@/app/products/_product-filters/product-filter-mobile";
+import ProductFiltersDesktop from "@/app/products/_product-filters/product-filters-desktop";
 import { getCategories } from "@/lib/content/categories";
 import { getVariants } from "@/lib/content/variants";
+import ProductViews from "./_product-view-section/product-views";
 
 const ProductsContent = async () => {
   const products = await getProducts();

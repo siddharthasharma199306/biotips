@@ -3,10 +3,10 @@
 import { useProductFilters } from "@/hooks/use-product-filters";
 import ProductGrid from "./product-grid";
 import ProductTable from "./product-table";
-import useFilteredProducts from "./hooks/useFilteredProducts";
 import { Product } from "@/lib/content/products";
 import { Category } from "@/lib/content/categories";
 import { Variant } from "@/lib/content/variants";
+import useFilteredProducts from "../_hooks/useFilteredProducts";
 
 export default function ProductViews({
   products,

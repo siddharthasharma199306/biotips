@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import ProductBanner from "@/components/products/product-banner";
+import ProductBanner from "@/app/products/product-banner";
 import ProductsContent from "./products-content";
 
 export default function Products() {

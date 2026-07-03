@@ -1,9 +1,9 @@
 import ProductCategoryCard from "@/ui/product-category-card";
-import useFilteredProducts from "./hooks/useFilteredProducts";
-import findPrimaryImage from "./utils/find-primary-image";
 import { Product } from "@/lib/content/products";
 import { Category } from "@/lib/content/categories";
 import { Variant } from "@/lib/content/variants";
+import useFilteredProducts from "../_hooks/useFilteredProducts";
+import findPrimaryImage from "../_utils/find-primary-image";
 
 const ProductGrid = ({
   products,
