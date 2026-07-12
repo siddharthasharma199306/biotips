@@ -35,7 +35,7 @@ const ProductGrid = ({
             category={categoryLabel}
             variant={product.variant}
             description={product.description}
-            imageSrc={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${primaryImage}`}
+            imageSrc={`${process.env.NEXT_PUBLIC_ASSET_URL}/${primaryImage}`}
             salts={product.salts}
             buttonText="View Product"
           />

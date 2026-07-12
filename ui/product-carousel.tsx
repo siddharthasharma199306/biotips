@@ -31,7 +31,7 @@ const ProductCarousel = ({ images, title }: ProductCarouselProps) => {
             <div key={index} className="min-w-0 shrink-0 grow-0 basis-full">
               <div className="relative h-87.5 md:h-125 lg:h-162.5">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/${image}`}
+                  src={`${process.env.NEXT_PUBLIC_ASSET_URL}/${image}`}
                   alt={`${title}-${index}`}
                   fill
                   loading={index === 0 ? "eager" : "lazy"}

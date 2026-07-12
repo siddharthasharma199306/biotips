@@ -5,7 +5,7 @@ import SectiontitleBadge from "@/ui/section-title-badge";
 const AboutSection = () => {
   return (
     <SectionSplitLayout
-      imageSrc={`${process.env.NEXT_PUBLIC_IMAGES_URL}/site/about-section-side-image.png`}
+      imageSrc={`${process.env.NEXT_PUBLIC_ASSET_URL}/site/about-section-side-image.png`}
       imageAlt="About Biotips"
     >
       <SectiontitleBadge title="About Biotips" />

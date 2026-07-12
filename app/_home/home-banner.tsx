@@ -8,7 +8,7 @@ const HomeBanner = () => {
     <section className="relative flex min-h-[calc(100vh-80px)] w-screen items-center overflow-hidden">
       {/* Background Image */}
       <Image
-        src={`${process.env.NEXT_PUBLIC_IMAGES_URL}/site/home-banner-background.png`}
+        src={`${process.env.NEXT_PUBLIC_ASSET_URL}/site/home-banner-background.png`}
         alt=""
         fill
         priority
