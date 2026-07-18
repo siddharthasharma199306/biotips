@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import Image from "next/image";
 import { Product } from "@/lib/content/products";
 import { Category } from "@/lib/content/categories";
 import { Variant } from "@/lib/content/variants";
@@ -37,13 +37,24 @@ const ProductTable = ({
         <tbody>
           {filteredProducts.map((product) => {
             const primaryImage = findPrimaryImage(product.images);
+            const categoryLabel =
+              categories.find((item) => item.value === product.category)
+                ?.label ?? product.category;
+            const variantLabel =
+              variants.find((item) => item.value === product.variant)?.label ??
+              product.variant;
             return (
               <tr key={product.slug}>
                 <td>
                   <div className="flex items-center gap-4">
                     <div className="avatar">
                       <div className="h-14 w-14 rounded-lg bg-base-200">
-                        <img src={primaryImage} alt={product.title} />
+                        <Image
+                          src={`${process.env.NEXT_PUBLIC_ASSET_URL}/${primaryImage}`}
+                          alt={product.title}
+                          width={56}
+                          height={56}
+                        />
                       </div>
                     </div>
 
@@ -57,9 +68,9 @@ const ProductTable = ({
                   </div>
                 </td>
 
-                <td>{product.category}</td>
+                <td>{categoryLabel}</td>
 
-                <td>{product.variant}</td>
+                <td>{variantLabel}</td>
 
                 <td className="max-w-70">
                   <div className="space-y-1">

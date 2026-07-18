@@ -26,6 +26,9 @@ const ProductGrid = ({
         const categoryLabel =
           categories.find((item) => item.value === product.category)?.label ??
           product.category;
+        const variantLabel =
+          variants.find((item) => item.value === product.variant)?.label ??
+          product.variant;
         const primaryImage = findPrimaryImage(product.images);
         return (
           <ProductCategoryCard
@@ -33,7 +36,7 @@ const ProductGrid = ({
             slug={product.slug}
             title={product.title}
             category={categoryLabel}
-            variant={product.variant}
+            variant={variantLabel}
             description={product.description}
             imageSrc={`${process.env.NEXT_PUBLIC_ASSET_URL}/${primaryImage}`}
             salts={product.salts}
