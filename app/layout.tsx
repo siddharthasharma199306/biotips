@@ -16,7 +16,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Biotips Pharmaceutical",
+  metadataBase: new URL("https://biotipspharma.in"),
+
+  title: {
+    default: "Biotips Pharmaceutical",
+    template: "%s | Biotips Pharmaceutical",
+  },
+
   description: "Dedicated to Safeguarding healthy lives",
 };
 

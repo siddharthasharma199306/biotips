@@ -2,6 +2,16 @@ import { Suspense } from "react";
 
 import ProductBanner from "@/app/products/product-banner";
 import ProductsContent from "./products-content";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pharmaceutical Products",
+  description:
+    "Explore Biotips Pharmaceutical's range of medicines and pharmaceutical products across multiple therapeutic categories.",
+  alternates: {
+    canonical: "/products/",
+  },
+};
 
 export default function Products() {
   return (
